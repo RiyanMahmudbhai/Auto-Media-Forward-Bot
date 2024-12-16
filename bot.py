@@ -7,7 +7,11 @@ class Config:
     BOT_TOKEN = "8122656092:AAEmh5hWSYOo_Y9DCSD7rvDnvBvMGGogreM"
     API_ID = "11970346"
     API_HASH = "bf43ff670be15fd740eed94820fdd49f"
-    CHANNEL = ["-1002386644256:-1002484982348"]  # Format: "source:destination"
+    CHANNEL = [
+        "-1002386644256:-1002484982348",
+        "-1001597273610:-1001721796359",
+        "999888777:333222111"
+    ]  # Add multiple mappings as needed
 
 # Logging Setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -37,15 +41,16 @@ class MediaForwardBot(Client, Config):
 bot = MediaForwardBot()
 
 # Media Filtering
-@bot.on_message(filters.channel & (filters.photo | filters.video | filters.audio | filters.document))
+@bot.on_message(filters.channel & filters.video)
 async def forward_media(client, message):
     try:
-        for mapping in Config.CHANNEL:
-            source, destination = mapping.split(":")
-            if str(message.chat.id) == source:
-                await message.copy(int(destination))
-                logger.info(f"Forwarded media from {source} to {destination}")
-                await asyncio.sleep(1)  # To prevent flooding
+        if message.video and (message.video.mime_type == "video/x-matroska" or message.video.mime_type == "video/mp4"):
+            for mapping in Config.CHANNEL:
+                source, destination = mapping.split(":")
+                if str(message.chat.id) == source:
+                    await message.copy(int(destination))
+                    logger.info(f"Forwarded video from {source} to {destination}")
+                    await asyncio.sleep(1)  # To prevent flooding
     except Exception as e:
         logger.error(f"Error while forwarding: {e}")
 
