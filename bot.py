@@ -4,10 +4,10 @@ from pyrogram import Client, filters
 
 # Configuration Class
 class Config:
-    BOT_TOKEN = "your_bot_token_here"
-    API_ID = "your_api_id_here"
-    API_HASH = "your_api_hash_here"
-    CHANNEL = ["source_channel_id:destination_channel_id"]  # Format: "source:destination"
+    BOT_TOKEN = "8122656092:AAEmh5hWSYOo_Y9DCSD7rvDnvBvMGGogreM"
+    API_ID = "11970346"
+    API_HASH = "bf43ff670be15fd740eed94820fdd49f"
+    CHANNEL = ["-1002386644256:-1002484982348"]  # Format: "source:destination"
 
 # Logging Setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
