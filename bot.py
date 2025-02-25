@@ -5,13 +5,14 @@ from pyrogram.errors import PeerIdInvalid, ChatWriteForbidden, FloodWait
 
 # Configuration Class
 class Config:
-    BOT_TOKEN = "8122656092:AAEmh5hWSYOo_Y9DCSD7rvDnvBvMGGogreM"
-    API_ID = "11970346"
-    API_HASH = "bf43ff670be15fd740eed94820fdd49f"
+    BOT_TOKEN = "7511272624:AAGgPlimBQ_A8UBfh2hIPYdBEXlnmGKVV04"
+    API_ID = "25902474"
+    API_HASH = "e0613c7a7b94e0025a20f5cf7bc69eee"
     CHANNEL = [
         "-1002386644256:-1002484982348",
         "-1001597273610:-1001721796359",
-        "112233445566:77889900"
+        "-1002261820786:-1002255696539",
+        "-1002418710282:-1002292610792",
     ]  # Add multiple mappings as needed
 
 # Logging Setup
