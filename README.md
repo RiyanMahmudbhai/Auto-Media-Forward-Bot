@@ -1,60 +1,129 @@
-# CHANNEL AUTO FORWARD
-A Simple telegram bot written in python to forward your files from one channel to other channel when a new post is available. What you need to do is just deploy this code. 
+# Auto-Media-Forward-Bot
 
-[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Ns-AnoNymouS/TG-CONVERT-BOT/tree/main)
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://telegram.dog/Ns_AnoNymouS)
+This project allows you to forward media (videos) from one Telegram channel to others using a Telegram bot.
 
-## How to Deploy? 🤔
-You can deploy this code any where you want but we provided heroku and railway deploy methods below
+## Requirements
 
-- Select one of the methods
-     - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Ns-AnoNymouS/auto-caption-bot)
+- Python 3.x
+- [Pyrogram](https://github.com/pyrogram/pyrogram) library
+- [tgcrypto](https://github.com/pyrogram/tgcrypto) (optional for faster encryption)
 
-     - [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/wEf927)
+## Installation
 
-- Go to  [my.telegram.org](https://my.telegram.org/)
-     - And get your API ID
-     - And API Hashes
+1. **Clone the Repository**
 
-- Paste the below API_HASH and API_ID respectively.
+   First, clone the repository to your VPS:
 
-- Get the your channel id and paste in below in the format -10023352648:-100655379
-     - In the about format -10023352648 is the channel from which you need to forward 
-     - and -100655379 is the channel to which you wanted to forward 
-[<p align="center"><img src="https://telegra.ph/file/2130bae31fa168ae57224.jpg" width="300">](https://telegram.dog/Ns_bot_updates)
+   ```bash
+   git clone https://github.com/RiyanMahmudbhai/Auto-Media-Forward-Bot.git
+   cd Auto-Media-Forward-Bot
+   ```bash
+   
+2. Create and Activate Virtual Environment
 
-- Get the Bot Father Token from [@BotFather](https://telegram.dog/botfather)
+   Create a virtual environment in the project folder and activate it:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```bash
+3. Install Dependencies
 
-- Paste the token below BOT_TOKEN.
+Install the required libraries from requirements.txt:
+   ```bash
+   pip install -r requirements.txt
+   ```bash
+Setup Systemd Service
+1. Create the systemd Service Unit File
+Create a new systemd service file at /etc/systemd/system/telegram-mediaforwad2bot.service:
+   ```bash
+   sudo nano /etc/systemd/system/telegram-mediaforwad2bot.service
+   ```bash
+2. Edit the Service File
+Add the following configuration, customizing the paths to your project and virtual environment as needed:
+   ```bash
+   [Unit]
+Description=Telegram Media Forward Bot
+After=network.target
 
-- Set AS_COPY value to True if you want to forward messages without forward tag.
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/Auto-Media-Forward-Bot
+ExecStart=/root/Auto-Media-Forward-Bot/venv/bin/python3 /root/Auto-Media-Forward-Bot/bot.py
+Restart=always
+RestartSec=10
+Environment="PATH=/root/Auto-Media-Forward-Bot/venv/bin:/usr/bin:/bin"
+Environment="VIRTUAL_ENV=/root/Auto-Media-Forward-Bot/venv"
+
+[Install]
+WantedBy=multi-user.target
+   ```bash
+
+3. Reload systemd and Start the Service
+After saving and exiting the file (CTRL+X, then Y to confirm, and ENTER to save), reload the systemd daemon to apply the changes:
+
+```bash
+sudo systemctl daemon-reload
+```bash
+Then start the service with the following command:
+```bash
+sudo systemctl start telegram-mediaforwad2bot.service
+```bash
+4. Enable the Service to Start on Boot
+To ensure the bot starts automatically on system boot, enable the service:
+
+```bash
+sudo systemctl enable telegram-mediaforwad2bot.service
+```bash
+5. Check the Service Status
+You can check the status of the service to verify that it is running:
+```bash
+sudo systemctl status telegram-mediaforwad2bot.service
+```bash
+This will show you whether the bot is active and running.
+
+6. Stop or Restart the Service (Optional)
+If you need to stop or restart the service, you can use the following commands:
+
+Stop the service:
+
+```bash
+sudo systemctl stop telegram-mediaforwad2bot.service
+```bash
+Restart the service:
+
+```bash
+sudo systemctl restart telegram-mediaforwad2bot.service
+```bash
+Usage
+Once the bot is running, it will forward media (videos) from one Telegram channel to others as defined in the script. You can monitor the bot's logs using:
+
+```bash
+sudo journalctl -u telegram-mediaforwad2bot.service -f
+```bash
+This will show real-time logs for the bot.
 
 
-## How to reach Me ?
-<a href="https://telegram.dog/Ns_bot_updates"><img src="https://img.shields.io/badge/Join-Telegram%20Channel-red.svg?logo=Telegram"></a>
-<a href="https://telegram.dog/Ns_Bot_supporters"><img src="https://img.shields.io/badge/Join-Telegram%20Group-blue.svg?logo=telegram"></a>
-
-## COMMANDS
-### AVAILABLE COMMANDS 
-```
-start - check whether bot is alive 
-
-about - to know about me
-```
-
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
-
-## License
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Ns-AnoNymouS/TG-CONVERT-BOT/blob/main/LICENSE)
-
-## Status
-[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://github.com/Ns-AnoNymouS/TG-CONVERT-BOT/tree/main)
-![Forks](https://img.shields.io/github/forks/Ns-AnoNymouS/TG-CONVERT-BOT)
-![1](https://github-readme-stats.vercel.app/api/top-langs/?username=Ns-AnoNymouS&theme=blue-green)
-[![Anonymous's github stats](https://github-readme-stats.vercel.app/api?username=Ns-AnoNymouS&theme=blue-green)](https://github.com/anuraghazra/github-readme-stats)
 
 
-## Thanks and credits
-[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/kennethreitz)
-- [Dan](https://telegram.dog/haskell) for his pyrogram docs
-- [MaheshMalekar](https://telegram.dog/MaheshMalekar) ❤
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
